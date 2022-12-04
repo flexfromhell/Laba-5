@@ -11,8 +11,6 @@ conn = psycopg2.connect(
     port='5432'
 )
 cursor = conn.cursor()
-
-
 @app.route('/login/', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
@@ -30,8 +28,6 @@ def login():
         elif request.form.get("registration"):
             return redirect("/registration/")
     return render_template('login.html')
-
-
 @app.route('/registration/', methods=['POST', 'GET'])
 def registration():
     if request.method == 'POST':
@@ -48,8 +44,7 @@ def registration():
         if len(name) < 1:
             return render_template('noname.html')
         else:
-            cursor.execute('INSERT INTO service.users (full_name, login, password) VALUES (%s,%s,%s);',
-                           (str(name), str(login), str(password)))
+            cursor.execute('INSERT INTO service.users (full_name, login, password) VALUES (%s,%s,%s);', (str(name), str(login), str(password)))
             conn.commit()
             return redirect('/login/')
     return render_template('registration.html')
