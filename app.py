@@ -8,8 +8,7 @@ conn = psycopg2.connect(
     user='postgres',
     password='2004',
     host='localhost',
-    port='5432'
-)
+    port='5432')
 cursor = conn.cursor()
 @app.route('/login/', methods=['POST', 'GET'])
 def login():
@@ -36,7 +35,6 @@ def registration():
         password = request.form.get('password')
         if len(name) < 1 and len(login) < 1 and len(password) < 1:
             return render_template('empty2.html')
-
         if len(login) < 1:
             return render_template('nologin.html')
         if len(password) < 1:
